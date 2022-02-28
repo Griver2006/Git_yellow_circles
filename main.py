@@ -4,12 +4,13 @@ from random import randrange
 from PyQt5 import uic
 from PyQt5.QtGui import QPainter, QColor
 from PyQt5.QtWidgets import QApplication, QMainWindow
+from UI import Ui_MainWindow
 
 
-class MyWidget(QMainWindow):
+class MyWidget(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super(MyWidget, self).__init__()
-        uic.loadUi('UI.ui', self)
+        self.setupUi(self)
         self.initUi()
 
     def initUi(self):
@@ -18,7 +19,7 @@ class MyWidget(QMainWindow):
     def paintEvent(self, event):
         qp = QPainter()
         qp.begin(self)
-        qp.setBrush(QColor(200, 200, 0))
+        qp.setBrush(QColor(randrange(0, 255), randrange(0, 255), randrange(0, 255)))
         radius = randrange(5, 200)
         qp.drawEllipse(randrange(0, 500), randrange(0, 450), radius, radius)
         qp.end()
